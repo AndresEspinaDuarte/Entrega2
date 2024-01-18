@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Feriados Legales en Chile</title>
+ 
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h1>Feriados Legales en Chile</h1>
+    
+    <button onclick="getFeriados()">Mostrar Feriados</button>
+    
+    <div id="feriados"></div>
+    
+    <script>
+      function getFeriados() {
+        const url = "https://apis.digital.gob.cl/fl/feriados/2023";
+        
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            const feriados = data.map(feriado => `<p>${feriado.nombre} - ${feriado.fecha}</p>`).join("");
+            document.getElementById("feriados").innerHTML = feriados;
+          })
+          .catch(error => console.error(error));
+      }
+    </script>
+  </body>
+</html>
